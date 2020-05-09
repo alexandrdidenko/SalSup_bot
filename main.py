@@ -1,5 +1,4 @@
 # coding:utf-8
-# это в всетке дев
 import config
 import requests
 import telebot
