@@ -135,17 +135,6 @@ def planing(message):
     pythoncom.CoUninitialize()
 
 
-@bot.message_handler(commands=["focus"])
-def focus(message):
-    try:
-        bot.send_photo(chat_id=message.chat.id,
-                       photo=open(config.photo_plaping_focus, 'rb'))
-        print(message.text)
-    except FileNotFoundError:
-        print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
-
-
 #
 # @bot.message_handler(commands=["test"])
 # def start(message):

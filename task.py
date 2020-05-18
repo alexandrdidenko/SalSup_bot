@@ -16,22 +16,7 @@ def send(my_chat_id, my_photo, my_caption, filename=__name__):
         bot.send_message(id_bot_and_my, "бот не может отправить картинку " + filename)
 
 
-# def run_macro(file, macros):
-#     if os.path.exists(file):
-#         print('начало работы макроса')
-#         excel_macro = wincl.DispatchEx("Excel.application")
-#         excel_macro.Visible = True  # обязательно так иначе макрос не отрабатывает
-#         excel_path = os.path.expanduser(file)
-#         workbook = excel_macro.Workbooks.Open(Filename=excel_path, ReadOnly=1)
-#         excel_macro.Application.Run(macros)
-#         # workbook.Save()
-#         excel_macro.Application.Quit()
-#         del excel_macro
-#         print('конец работы макроса')
-#     else:
-#         print('нет такого файла:' + file)
-
-def run_macro(file, macros):
+def run_macro(file, macros):  # рабочий вариант функции
     if os.path.exists(file):
         print('начало работы макроса')
         try:

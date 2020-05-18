@@ -1,7 +1,8 @@
 # import pypyodbc
 # import config
 
-
+from datetime import datetime
+import time
 # def sql_cursor(myServer, myDatabase, myUid, myPwd, sql):
 #     connection_string = 'Driver={SQL Server Native Client 11.0};Server=%s;Database=%s;Uid=%s;Pwd=%s;' % (
 #         myServer, myDatabase, myUid, myPwd)
@@ -27,3 +28,4 @@
 # # ress = sql_cursor(config.myServer, config.myDatabase, config.myUid, config.myPwd, config.SQL_2)
 # #
 # # print(ress)
+
