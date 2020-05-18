@@ -1,5 +1,4 @@
 # coding:utf-8
-# это в всетке дев
 import config
 import requests
 import telebot
@@ -37,14 +36,14 @@ itembtn1 = types.KeyboardButton(text='/infocheck')
 itembtn2 = types.KeyboardButton('/prim_sec_sales')
 itembtn3 = types.KeyboardButton('/cube_sales')
 itembtn4 = types.KeyboardButton('/test')
-itembtn5 = types.KeyboardButton('/planing')
+itembtn5 = types.KeyboardButton('/sync')
 itembtn6 = types.KeyboardButton('/focus')
 itembtn7 = types.KeyboardButton('/export')
 
 markup.add(itembtn1,
            itembtn2,
            itembtn3,
-           # itembtn5,
+           itembtn5,
            # itembtn6,
            itembtn7)
 
@@ -102,20 +101,20 @@ def prim_sec_sales(message):
     pythoncom.CoUninitialize()
 
 
-@bot.message_handler(commands=["planing"])
+@bot.message_handler(commands=["sync"])
 def planing(message):
     pythoncom.CoInitialize()
-    task.run_macro(config.xls_planing, config.macros_planing)
+    task.run_macro(config.xls_sync, config.macros_sync)
     try:
         bot.send_photo(chat_id=message.chat.id,
-                       photo=open(config.photo_plaping, 'rb'))
+                       photo=open(config.photo_sync, 'rb'))
         print(message.text)
         # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
 
-    task.del_fife(config.photo_plaping)
+    task.del_fife(config.photo_sync)
     pythoncom.CoUninitialize()
 
 
@@ -134,17 +133,6 @@ def planing(message):
 
     task.del_fife(config.photo_export)
     pythoncom.CoUninitialize()
-
-
-@bot.message_handler(commands=["focus"])
-def focus(message):
-    try:
-        bot.send_photo(chat_id=message.chat.id,
-                       photo=open(config.photo_plaping_focus, 'rb'))
-        print(message.text)
-    except FileNotFoundError:
-        print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
 
 
 #
