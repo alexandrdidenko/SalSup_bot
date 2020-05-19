@@ -2,10 +2,9 @@
 import config
 import requests
 import telebot
-from telebot import types
 # import sql_con
 import pythoncom
-
+import keyboards as kb
 import task
 
 URL = 'https://api.telegram.org/bot' + config.TOKEN + '/'
@@ -20,37 +19,9 @@ def get_updates():
     return r.json()
 
 
-'''
-# Using the ReplyKeyboardMarkup class
-# It's constructor can take the following optional arguments:
-# - resize_keyboard: True/False (default False)
-# - one_time_keyboard: True/False (default False)
-# - selective: True/False (default False)
-# - row_width: integer (default 3)
-# row_width is used in combination with the add() function.
-# It defines how many buttons are fit on each row before continuing on the next row.
-'''
-
-markup = types.ReplyKeyboardMarkup(row_width=3, resize_keyboard=1)  # , one_time_keyboard=True, )
-itembtn1 = types.KeyboardButton(text='/infocheck')
-itembtn2 = types.KeyboardButton('/prim_sec_sales')
-itembtn3 = types.KeyboardButton('/cube_sales')
-itembtn4 = types.KeyboardButton('/test')
-itembtn5 = types.KeyboardButton('/sync')
-itembtn6 = types.KeyboardButton('/focus')
-itembtn7 = types.KeyboardButton('/export')
-
-markup.add(itembtn1,
-           itembtn2,
-           itembtn3,
-           itembtn5,
-           # itembtn6,
-           itembtn7)
-
-
 @bot.message_handler(commands=["start"])
 def start(message):
-    bot.send_message(message.chat.id, "Choose one comand:", reply_markup=markup)
+    bot.send_message(message.chat.id, "Choose one comand:", reply_markup=kb.markup)
 
 
 @bot.message_handler(commands=["infocheck"])
@@ -63,7 +34,7 @@ def infocheck(message):
         print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_infoChek)
     pythoncom.CoUninitialize()
@@ -79,7 +50,7 @@ def cube_sales(message):
         print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_cube_sales)
     pythoncom.CoUninitialize()
@@ -95,7 +66,7 @@ def prim_sec_sales(message):
         print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_prim_sec_sales)
     pythoncom.CoUninitialize()
@@ -112,7 +83,7 @@ def planing(message):
         # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_sync)
     pythoncom.CoUninitialize()
@@ -129,7 +100,7 @@ def planing(message):
         # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
-        bot.send_message(message.chat.id, "нет изображения", reply_markup=markup)
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_export)
     pythoncom.CoUninitialize()
