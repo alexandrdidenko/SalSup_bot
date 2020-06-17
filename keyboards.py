@@ -15,15 +15,15 @@ markup = types.ReplyKeyboardMarkup(row_width=3, resize_keyboard=1)  # , one_time
 itembtn1 = types.KeyboardButton(text='/infocheck')
 itembtn2 = types.KeyboardButton('/prim_sec_sales')
 itembtn3 = types.KeyboardButton('/cube_sales')
-# itembtn4 = types.KeyboardButton('/1')
+itembtn4 = types.KeyboardButton('/DD_chek')
 itembtn5 = types.KeyboardButton('/sync')
-# itembtn6 = types.KeyboardButton(text='/test')
+# itembtn6 = types.KeyboardButton('test')
 itembtn7 = types.KeyboardButton('/export')
 
 markup.add(itembtn1,
            itembtn2,
            itembtn3,
-           # itembtn4,
+           itembtn4,
            itembtn5,
            # itembtn6,
            itembtn7)

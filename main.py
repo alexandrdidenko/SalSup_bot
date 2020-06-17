@@ -106,6 +106,23 @@ def planing(message):
     pythoncom.CoUninitialize()
 
 
+@bot.message_handler(commands=["DD_chek"])
+def planing(message):
+    pythoncom.CoInitialize()
+    task.run_macro(config.xls_DD_chek, config.macros_DD_chek)
+    try:
+        bot.send_photo(chat_id=message.chat.id,
+                       photo=open(config.photo_DD_chek, 'rb'))
+        print(message.text)
+        # print(message.chat.id)
+    except FileNotFoundError:
+        print('FileNotFoundError')
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
+
+    task.del_fife(config.photo_DD_chek)
+    pythoncom.CoUninitialize()
+
+
 #
 # @bot.message_handler(commands=["test"])
 # def start(message):
@@ -114,5 +131,21 @@ def planing(message):
 #     print(mess)
 
 
+#
+# @bot.message_handler(content_types=['text'])
+# def test(message):
+#     if message.text.lower() == 'test':
+#         mess = 'Введите кастик'
+#         bot.send_message(message.chat.id, mess, reply_markup=kb.markup)
+#         bot.register_next_step_handler('test',pr())
+#
+#     else:
+#         mess = 'не понимаю'
+#         bot.send_message(message.chat.id, mess, reply_markup=kb.markup)
+#
+# def pr():
+#     print('сработало')
+
+
 if __name__ == '__main__':
-    bot.polling(none_stop=True)
+    bot.polling(none_stop=True, interval=0)
