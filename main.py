@@ -123,6 +123,23 @@ def planing(message):
     pythoncom.CoUninitialize()
 
 
+@bot.message_handler(commands=["sync_count"])
+def planing(message):
+    pythoncom.CoInitialize()
+    task.run_macro(config.xls_sync_count, config.macros_sync_count)
+    try:
+        bot.send_photo(chat_id=message.chat.id,
+                       photo=open(config.photo_sync_count, 'rb'))
+        print(message.text)
+        # print(message.chat.id)
+    except FileNotFoundError:
+        print('FileNotFoundError')
+        bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
+
+    task.del_fife(config.photo_sync_count)
+    pythoncom.CoUninitialize()
+
+
 #
 # @bot.message_handler(commands=["test"])
 # def start(message):
