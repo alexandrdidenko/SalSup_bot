@@ -17,7 +17,7 @@ itembtn2 = types.KeyboardButton('/prim_sec_sales')
 itembtn3 = types.KeyboardButton('/cube_sales')
 itembtn4 = types.KeyboardButton('/DD_chek')
 itembtn5 = types.KeyboardButton('/sync')
-# itembtn6 = types.KeyboardButton('test')
+itembtn6 = types.KeyboardButton('/sync_count')
 itembtn7 = types.KeyboardButton('/export')
 
 markup.add(itembtn1,
@@ -25,5 +25,5 @@ markup.add(itembtn1,
            itembtn3,
            itembtn4,
            itembtn5,
-           # itembtn6,
+           itembtn6,
            itembtn7)
