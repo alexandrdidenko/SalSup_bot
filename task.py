@@ -3,6 +3,7 @@ from main import bot
 import datetime
 import os
 import win32com.client as wincl
+import datetime
 
 
 def send(my_chat_id, my_photo, my_caption, filename=__name__):
@@ -42,3 +43,10 @@ def del_fife(file):
         print("фото " + file + ' удалено')
     else:
         print("The file does not exist")
+
+
+def log(message):
+    now = datetime.datetime.now()
+    text = message.from_user.first_name + ' ' + message.from_user.last_name + " - " + message.text + ' - ' + now.strftime(
+        "%d-%m-%Y %H:%M")
+    print(text)

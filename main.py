@@ -1,4 +1,5 @@
 # coding:utf-8
+
 import config
 import requests
 import telebot
@@ -6,6 +7,7 @@ import telebot
 import pythoncom
 import keyboards as kb
 import task
+import datetime
 
 URL = 'https://api.telegram.org/bot' + config.TOKEN + '/'
 bot = telebot.TeleBot(config.TOKEN)
@@ -21,17 +23,18 @@ def get_updates():
 
 @bot.message_handler(commands=["start"])
 def start(message):
+    task.log(message)
     bot.send_message(message.chat.id, "Choose one comand:", reply_markup=kb.markup)
 
 
 @bot.message_handler(commands=["infocheck"])
 def infocheck(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_infoChek, config.macros_infoChek)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_infoChek, 'rb'))
-        print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -43,11 +46,11 @@ def infocheck(message):
 @bot.message_handler(commands=["cube_sales"])
 def cube_sales(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_cube_sales, config.macros_cube_sales)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_cube_sales, 'rb'))
-        print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -59,11 +62,11 @@ def cube_sales(message):
 @bot.message_handler(commands=["prim_sec_sales"])
 def prim_sec_sales(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_prim_sec_sales, config.macros_prim_sec_sales)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_prim_sec_sales, 'rb'))
-        print(message.text)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -75,12 +78,11 @@ def prim_sec_sales(message):
 @bot.message_handler(commands=["sync"])
 def planing(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_sync, config.macros_sync)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_sync, 'rb'))
-        print(message.text)
-        # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -92,12 +94,11 @@ def planing(message):
 @bot.message_handler(commands=["export"])
 def planing(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_export, config.macros_export)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_export, 'rb'))
-        print(message.text)
-        # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -109,12 +110,11 @@ def planing(message):
 @bot.message_handler(commands=["DD_chek"])
 def planing(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_DD_chek, config.macros_DD_chek)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_DD_chek, 'rb'))
-        print(message.text)
-        # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
@@ -126,17 +126,35 @@ def planing(message):
 @bot.message_handler(commands=["sync_count"])
 def planing(message):
     pythoncom.CoInitialize()
+    task.log(message)
     task.run_macro(config.xls_sync_count, config.macros_sync_count)
     try:
         bot.send_photo(chat_id=message.chat.id,
                        photo=open(config.photo_sync_count, 'rb'))
-        print(message.text)
-        # print(message.chat.id)
     except FileNotFoundError:
         print('FileNotFoundError')
         bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
 
     task.del_fife(config.photo_sync_count)
+    pythoncom.CoUninitialize()
+
+
+@bot.message_handler(commands=["test"])
+def planing(message):
+    pythoncom.CoInitialize()
+    # task.run_macro(config.xls_sync_count, config.macros_sync_count)
+    # try:
+    #     bot.send_photo(chat_id=message.chat.id,
+    #                    photo=open(config.photo_sync_count, 'rb'))
+    #     print(message.text)
+    #     # print(message.chat.id)
+    # except FileNotFoundError:
+    #     print('FileNotFoundError')
+    #     bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
+    #
+    # task.del_fife(config.photo_sync_count)
+    task.log(message)
+
     pythoncom.CoUninitialize()
 
 
