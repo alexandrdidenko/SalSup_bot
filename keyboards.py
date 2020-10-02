@@ -19,11 +19,12 @@ itembtn4 = types.KeyboardButton('/DD_chek')
 itembtn5 = types.KeyboardButton('/sync')
 itembtn6 = types.KeyboardButton('/sync_count')
 itembtn7 = types.KeyboardButton('/export')
-
+itembtn8 = types.KeyboardButton('/test')
 markup.add(itembtn1,
            itembtn2,
            itembtn3,
            itembtn4,
            itembtn5,
            itembtn6,
-           itembtn7)
+           itembtn7,
+           itembtn8)
