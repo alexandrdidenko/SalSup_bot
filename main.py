@@ -6,6 +6,7 @@ import telebot
 # import sql_con
 import pythoncom
 import keyboards as kb
+import send_test
 import task
 import datetime
 
@@ -153,6 +154,7 @@ def planing(message):
     #     bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
     #
     # task.del_fife(config.photo_sync_count)
+    # send_test.sTest(message.chat.id)
     task.log(message)
 
     pythoncom.CoUninitialize()
