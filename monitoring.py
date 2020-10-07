@@ -4,8 +4,11 @@ from send_sync import send_sync_my
 from sql_con import sql_cursor
 
 # условия
-count_sync = 100
+count_sync1 = 50
+count_sync2 = 20
 sleep_sec = 300
+
+lim = count_sync1
 
 
 def num():
@@ -14,20 +17,27 @@ def num():
 
     for r in res[0]:
         n = r
-    # n = 2
+    # n = 19
     return n
 
 
-def chek():
+def chek(sync1, sync2):
     count = num()
-    if count >= count_sync:
-        print('норма: ' + str(count_sync) + ' - факт: ' + str(count))
-        send_sync_my()
-    else:
-        print('норма: ' + str(count_sync) + ' - факт: ' + str(count))
+    global lim
+    try:
+        if count >= lim:
+            lim = sync2
+            print('норма:', lim, ' - факт:', count)
+            print('отправляем статус')
+            send_sync_my()
+        else:
+            lim = sync1
+            print('норма:', lim, ' - факт:', count)
+    except TypeError:
+        print('проверь ВПН. нет связи с сервером')
 
 
 i = 1
 while i == 1:
-    chek()
+    chek(count_sync1, count_sync2)
     sleep(sleep_sec)
