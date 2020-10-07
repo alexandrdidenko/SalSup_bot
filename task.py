@@ -50,3 +50,4 @@ def log(message):
     text = message.from_user.first_name + ' ' + message.from_user.last_name + " - " + message.text + ' - ' + now.strftime(
         "%d-%m-%Y %H:%M")
     print(text)
+

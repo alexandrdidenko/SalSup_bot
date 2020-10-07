@@ -1,4 +1,5 @@
 # coding:utf-8
+from time import sleep
 
 import config
 import requests
@@ -154,9 +155,9 @@ def planing(message):
     #     bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
     #
     # task.del_fife(config.photo_sync_count)
-    # send_test.sTest(message.chat.id)
-    task.log(message)
 
+    task.log(message)
+    # bot.send_message(message.chat.id, send_test.sTest(message.chat.id), reply_markup=kb.markup)
     pythoncom.CoUninitialize()
 
 
@@ -182,7 +183,6 @@ def planing(message):
 #
 # def pr():
 #     print('сработало')
-
 
 if __name__ == '__main__':
     bot.polling(none_stop=True, interval=0)
