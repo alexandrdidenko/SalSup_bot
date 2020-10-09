@@ -1,14 +1,18 @@
+import datetime
+import os
 from time import sleep
 import config
-from send_sync import send_sync_my
+import send_sync
 from sql_con import sql_cursor
 
 # условия
-count_sync1 = 50
+count_sync1 = 100
 count_sync2 = 20
-sleep_sec = 300
+sleep_sec1 = 900
+sleep_sec2 = 300
 
 lim = count_sync1
+sec = sleep_sec1
 
 
 def num():
@@ -21,23 +25,29 @@ def num():
     return n
 
 
-def chek(sync1, sync2):
+def chek(sync1, sync2, sleep1, sleep2):
     count = num()
     global lim
+    global sec
+    now = datetime.datetime.now()
     try:
         if count >= lim:
             lim = sync2
-            print('норма:', lim, ' - факт:', count)
+            sec = sleep2
+            print(now.strftime("%d-%m-%Y %H:%M"), 'норма:', lim, 'факт:', count, 'ждем:', sec, 'секунд')
             print('отправляем статус')
-            send_sync_my()
+            send_sync.sync(config.ID_SALESSUPPORT_CHANNEL)
+            # send_sync.sync(config.id_bot_and_my)
         else:
             lim = sync1
-            print('норма:', lim, ' - факт:', count)
+            sec = sleep1
+            print(now.strftime("%d-%m-%Y %H:%M"), 'норма:', lim, 'факт:', count, 'ждем:', sec, 'секунд')
     except TypeError:
         print('проверь ВПН. нет связи с сервером')
+        os.system(r'C:\Users\alexandr.didenko\Desktop\VPN-on.bat')
 
 
 i = 1
 while i == 1:
-    chek(count_sync1, count_sync2)
-    sleep(sleep_sec)
+    chek(count_sync1, count_sync2, sleep_sec1, sleep_sec2)
+    sleep(sec)
