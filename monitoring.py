@@ -6,8 +6,8 @@ import send_sync
 from sql_con import sql_cursor
 
 # условия
-count_sync1 = 100
-count_sync2 = 20
+count_sync1 = 80
+count_sync2 = 30
 sleep_sec1 = 900
 sleep_sec2 = 300
 
@@ -50,4 +50,10 @@ def chek(sync1, sync2, sleep1, sleep2):
 i = 1
 while i == 1:
     chek(count_sync1, count_sync2, sleep_sec1, sleep_sec2)
-    sleep(sec)
+    #sleep(sec)
+
+    a = sec
+    while a > 0:
+    	print(a)
+    	a = a-1
+    	sleep(1)

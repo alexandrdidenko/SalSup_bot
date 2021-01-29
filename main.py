@@ -12,6 +12,7 @@ import send_sync
 import send_sync_count
 import task
 import send_export
+import send_poc_ka
 
 URL = 'https://api.telegram.org/bot' + config.TOKEN + '/'
 bot = telebot.TeleBot(config.TOKEN)
@@ -130,7 +131,7 @@ def planing(message):
     #     bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
     #
     # task.del_fife(config.photo_DD_chek)
-    send_dd_chek.dd_chek(prim_sec_sales)
+    send_dd_chek.dd_chek(message.chat.id)
     pythoncom.CoUninitialize()
 
 
@@ -148,6 +149,23 @@ def planing(message):
     #
     # task.del_fife(config.photo_sync_count)
     send_sync_count.sync_count(message.chat.id)
+    pythoncom.CoUninitialize()
+
+
+@bot.message_handler(commands=["poc_ka"])
+def planing(message):
+    pythoncom.CoInitialize()
+    task.log(message)
+    # task.run_macro(config.xls_sync_count, config.macros_sync_count)
+    # try:
+    #     bot.send_photo(chat_id=message.chat.id,
+    #                    photo=open(config.photo_sync_count, 'rb'))
+    # except FileNotFoundError:
+    #     print('FileNotFoundError')
+    #     bot.send_message(message.chat.id, "нет изображения", reply_markup=kb.markup)
+    #
+    # task.del_fife(config.photo_sync_count)
+    send_poc_ka.poc_ka(message.chat.id)
     pythoncom.CoUninitialize()
 
 
